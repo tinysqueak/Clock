@@ -1,18 +1,52 @@
-import java.awt.Graphics;
 
 public class Clock{
 
-	private int x;
-	private int y;
+	private int centerX;
+	private int centerY;
+	private int radius;
+
+	public Clock(int x, int y, int radius) {
+
+		this.centerX = x;
+		this.centerY = y;
+		this.radius = radius;
+
+	}
+
+	public int getCenterX() {
+
+		return centerX;
+
+	}
 	
-	private int size;
+	public void setCenterX(int x) {
 		
-	public Clock (int x, int y, int size) {
+		centerX = x;
 		
-		this.x = x;
-		this.y = y;
-		this.size = size;
+	}
+
+	public int getCenterY() {
+
+		return centerY;
+
+	}
+	
+	public void setCenterY(int y) {
+		
+		centerY = y;
 		
 	}
 	
+	public int getRadius() {
+		
+		return radius;
+		
+	}
+	
+	public void setRadius(int radius) {
+		
+		this.radius = radius;
+		
+	}
+
 }

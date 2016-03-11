@@ -1,13 +1,16 @@
 import javax.swing.JFrame;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ClockFrame extends JFrame{
 	
 	private int seconds;
+	private ArrayList<Clock> clockList;
 	
 	public ClockFrame() {
 		
 		setSize(700, 600);
+		clockList = new ArrayList<Clock>();
 		
 	}
 	
@@ -32,6 +35,12 @@ public class ClockFrame extends JFrame{
 		
 		g.setColor(Color.BLACK);
 		g.drawOval(210, 150, 250, 250);
+		
+		for(Clock clock : clockList) {
+			
+			drawClock(g, clock);
+			
+		}
 		
 		drawSecondClock(g, targetSecondsX, targetSecondsY);
 		drawSecondHand(g, 335, 275, targetSecondsX, targetSecondsY);
@@ -90,6 +99,32 @@ public class ClockFrame extends JFrame{
 		drawSecondHand(g, targetX, targetY, targetSecondsX, targetSecondsY);
 		drawMinuteHand(g, targetX, targetY, targetMinutesX, targetMinutesY);
 		drawHourHand(g, targetX, targetY, targetHoursX, targetHoursY);
+		
+	}
+	
+	public void drawClock(Graphics g, Clock clock) {
+		
+		g.setColor(Color.BLACK);
+		g.drawOval(clock.getCenterX() - clock.getRadius(), clock.getCenterY() - clock.getRadius(), clock.getRadius() * 2, clock.getRadius() * 2);
+
+		int targetSecondsX = clock.getCenterX() + (int)(clock.getRadius() * Math.cos(Math.toRadians(90 - 6 * seconds)));
+		int targetSecondsY = clock.getCenterY() - (int)(clock.getRadius() * Math.sin(Math.toRadians(90 - 6 * seconds)));
+
+		int targetMinutesX = clock.getCenterX() + (int)(4 * clock.getRadius() / 5 * Math.cos(Math.toRadians(90 - 6 * seconds / 60)));
+		int targetMinutesY = clock.getCenterY() - (int)(4 * clock.getRadius() / 5 * Math.sin(Math.toRadians(90 - 6 * seconds / 60)));
+
+		int targetHoursX = clock.getCenterX() + (int)(2 * clock.getRadius() / 5 * Math.cos(Math.toRadians(90 - 30 * seconds / 3600)));
+		int targetHoursY = clock.getCenterY() - (int)(2 * clock.getRadius() / 5 * Math.sin(Math.toRadians(90 - 30 * seconds / 3600)));
+
+		drawSecondHand(g, clock.getCenterX(), clock.getCenterY(), targetSecondsX, targetSecondsY);
+		drawMinuteHand(g, clock.getCenterX(), clock.getCenterY(), targetMinutesX, targetMinutesY);
+		drawHourHand(g, clock.getCenterX(), clock.getCenterY(), targetHoursX, targetHoursY);
+	
+	}
+	
+	public void addClock(Clock clock) {
+		
+		clockList.add(clock);
 		
 	}
 	

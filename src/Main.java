@@ -10,6 +10,9 @@ public class Main {
 		clocks.setLocationRelativeTo(null);
 		clocks.setTitle("Clocks");
 		
+		Clock generalizedClock = new Clock(200, 200, 100);
+		clocks.addClock(generalizedClock);
+		
 	}
 
 }
