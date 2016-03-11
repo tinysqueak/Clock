@@ -34,9 +34,9 @@ public class ClockFrame extends JFrame{
 		g.drawOval(210, 150, 250, 250);
 		
 		drawSecondClock(g, targetSecondsX, targetSecondsY);
-		drawSecondHand(g, targetSecondsX, targetSecondsY);
-		drawMinuteHand(g, targetMinutesX, targetMinutesY);
-		drawHourHand(g, targetHoursX, targetHoursY);
+		drawSecondHand(g, 335, 275, targetSecondsX, targetSecondsY);
+		drawMinuteHand(g, 335, 275, targetMinutesX, targetMinutesY);
+		drawHourHand(g, 335, 275, targetHoursX, targetHoursY);
 		
 		seconds++;
 		System.out.println(seconds);
@@ -52,24 +52,24 @@ public class ClockFrame extends JFrame{
 		
 	}
 	
-	public void drawSecondHand(Graphics g, int targetX, int targetY) {
+	public void drawSecondHand(Graphics g, int startX, int startY, int targetX, int targetY) {
 		
 		g.setColor(Color.RED);
-		g.drawLine(335, 275, targetX, targetY);
+		g.drawLine(startX, startY, targetX, targetY);
 		
 	}
 	
-	public void drawMinuteHand(Graphics g, int targetX, int targetY) {
+	public void drawMinuteHand(Graphics g, int startX, int startY, int targetX, int targetY) {
 		
 		g.setColor(Color.BLUE);
-		g.drawLine(335, 275, targetX, targetY);
+		g.drawLine(startX, startY, targetX, targetY);
 		
 	}
 	
-	public void drawHourHand(Graphics g, int targetX, int targetY) {
+	public void drawHourHand(Graphics g, int startX, int startY, int targetX, int targetY) {
 		
 		g.setColor(Color.GREEN);
-		g.drawLine(335, 275, targetX, targetY);
+		g.drawLine(startX, startY, targetX, targetY);
 		
 	}
 	
@@ -77,6 +77,19 @@ public class ClockFrame extends JFrame{
 		
 		g.setColor(Color.BLACK);
 		g.drawOval(targetX - 25, targetY - 25, 50, 50);
+		
+		int targetSecondsX = targetX + (int)(25 * Math.cos(Math.toRadians(90 - 6 * seconds)));
+		int targetSecondsY = targetY - (int)(25 * Math.sin(Math.toRadians(90 - 6 * seconds)));
+		
+		int targetMinutesX = targetX + (int)(20 * Math.cos(Math.toRadians(90 - 6 * seconds / 60)));
+		int targetMinutesY = targetY - (int)(20 * Math.sin(Math.toRadians(90 - 6 * seconds / 60)));
+		
+		int targetHoursX = targetX + (int)(10 * Math.cos(Math.toRadians(90 - 30 * seconds / 3600)));
+		int targetHoursY = targetY - (int)(10 * Math.sin(Math.toRadians(90 - 30 * seconds / 3600)));
+		
+		drawSecondHand(g, targetX, targetY, targetSecondsX, targetSecondsY);
+		drawMinuteHand(g, targetX, targetY, targetMinutesX, targetMinutesY);
+		drawHourHand(g, targetX, targetY, targetHoursX, targetHoursY);
 		
 	}
 	
