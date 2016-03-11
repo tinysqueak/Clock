@@ -107,14 +107,18 @@ public class ClockFrame extends JFrame{
 		g.setColor(Color.BLACK);
 		g.drawOval(clock.getCenterX() - clock.getRadius(), clock.getCenterY() - clock.getRadius(), clock.getRadius() * 2, clock.getRadius() * 2);
 
-		int targetSecondsX = clock.getCenterX() + (int)(clock.getRadius() * Math.cos(Math.toRadians(90 - 6 * seconds)));
-		int targetSecondsY = clock.getCenterY() - (int)(clock.getRadius() * Math.sin(Math.toRadians(90 - 6 * seconds)));
+		int startingSecondsAngle = 90 - clock.getStartingSecond() * 6;
+		int startingMinutesAngle = 90 - clock.getStartingMinute() * 6 - 6 * clock.getStartingSecond() / 60;
+		int startingHoursAngle = 90 - clock.getStartingHour() * 30 - 30 * clock.getStartingSecond() / 3600 - 30 * clock.getStartingMinute() / 60;
+		
+		int targetSecondsX = clock.getCenterX() + (int)(clock.getRadius() * Math.cos(Math.toRadians(startingSecondsAngle - 6 * seconds)));
+		int targetSecondsY = clock.getCenterY() - (int)(clock.getRadius() * Math.sin(Math.toRadians(startingSecondsAngle - 6 * seconds)));
 
-		int targetMinutesX = clock.getCenterX() + (int)(4 * clock.getRadius() / 5 * Math.cos(Math.toRadians(90 - 6 * seconds / 60)));
-		int targetMinutesY = clock.getCenterY() - (int)(4 * clock.getRadius() / 5 * Math.sin(Math.toRadians(90 - 6 * seconds / 60)));
+		int targetMinutesX = clock.getCenterX() + (int)(4 * clock.getRadius() / 5 * Math.cos(Math.toRadians(startingMinutesAngle - 6 * seconds / 60)));
+		int targetMinutesY = clock.getCenterY() - (int)(4 * clock.getRadius() / 5 * Math.sin(Math.toRadians(startingMinutesAngle - 6 * seconds / 60)));
 
-		int targetHoursX = clock.getCenterX() + (int)(2 * clock.getRadius() / 5 * Math.cos(Math.toRadians(90 - 30 * seconds / 3600)));
-		int targetHoursY = clock.getCenterY() - (int)(2 * clock.getRadius() / 5 * Math.sin(Math.toRadians(90 - 30 * seconds / 3600)));
+		int targetHoursX = clock.getCenterX() + (int)(2 * clock.getRadius() / 5 * Math.cos(Math.toRadians(startingHoursAngle - 30 * seconds / 3600)));
+		int targetHoursY = clock.getCenterY() - (int)(2 * clock.getRadius() / 5 * Math.sin(Math.toRadians(startingHoursAngle - 30 * seconds / 3600)));
 
 		drawSecondHand(g, clock.getCenterX(), clock.getCenterY(), targetSecondsX, targetSecondsY);
 		drawMinuteHand(g, clock.getCenterX(), clock.getCenterY(), targetMinutesX, targetMinutesY);
