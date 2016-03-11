@@ -29,9 +29,11 @@ public class ClockFrame extends JFrame{
 		}
 		
 		drawBackground(g);
+		
 		g.setColor(Color.BLACK);
 		g.drawOval(210, 150, 250, 250);
 		
+		drawSecondClock(g, targetSecondsX, targetSecondsY);
 		drawSecondHand(g, targetSecondsX, targetSecondsY);
 		drawMinuteHand(g, targetMinutesX, targetMinutesY);
 		drawHourHand(g, targetHoursX, targetHoursY);
@@ -39,7 +41,6 @@ public class ClockFrame extends JFrame{
 		seconds++;
 		System.out.println(seconds);
 		
-		if(seconds <= 3600)
 		repaint();
 		
 	}
@@ -72,7 +73,11 @@ public class ClockFrame extends JFrame{
 		
 	}
 	
+	public void drawSecondClock(Graphics g, int targetX, int targetY) {
+		
+		g.setColor(Color.BLACK);
+		g.drawOval(targetX - 25, targetY - 25, 50, 50);
+		
+	}
 	
-	
-
 }
