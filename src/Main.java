@@ -9,10 +9,10 @@ public class Main {
 		clocks.setVisible(true);
 		clocks.setLocationRelativeTo(null);
 		clocks.setTitle("Clocks");
-		
+
 		Clock generalizedClock = new Clock(200, 200, 100, 12, 30, 45);
 		clocks.addClock(generalizedClock);
-		
+
 	}
 
 }
